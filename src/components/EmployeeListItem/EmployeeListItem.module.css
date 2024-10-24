@@ -1,0 +1,59 @@
+.container {
+    display: flex;
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    min-height: calc(var(--spacing-l) * 2);
+    padding: var(--spacing-s);
+    max-width: 1200px;
+    flex-wrap: wrap;
+    gap: var(--spacing-m);
+}
+
+.avatar {
+    width: calc(var(--spacing-l) * 3);
+    height: calc(var(--spacing-l) * 3);
+    border-radius: var(--spacing-s);
+    margin-right: var(--spacing-m);
+    background: var(--primary);
+}
+
+.name {
+    margin-bottom: var(--spacing-s);
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+}
+
+.hireData {
+    display: flex;
+    gap: var(--spacing-s);
+    flex-direction: column;
+}
+
+.link {
+    background: var(--success);
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-s);
+    border-radius: var(--spacing-s);
+    transition: 0.1s ease all;
+    text-align: center;
+}
+
+.linkContainer {
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.link:hover {
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+}

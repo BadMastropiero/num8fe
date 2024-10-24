@@ -28,6 +28,7 @@ export type CreateEmployeeInput = {
   departmentId?: InputMaybe<Scalars['Int']['input']>;
   firstName: Scalars['String']['input'];
   hireDate: Scalars['String']['input'];
+  isActive?: InputMaybe<Scalars['Boolean']['input']>;
   lastName: Scalars['String']['input'];
   phone?: InputMaybe<Scalars['String']['input']>;
 };
@@ -48,6 +49,7 @@ export type Employee = {
   firstName: Scalars['String']['output'];
   hireDate: Scalars['String']['output'];
   id?: Maybe<Scalars['Int']['output']>;
+  isActive?: Maybe<Scalars['Boolean']['output']>;
   lastName: Scalars['String']['output'];
   phone?: Maybe<Scalars['String']['output']>;
 };
@@ -121,7 +123,14 @@ export type UpdateEmployeeInput = {
 export type GetEmployeesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetEmployeesQuery = { __typename?: 'Query', getEmployees: Array<{ __typename?: 'Employee', id?: number | null, firstName: string, lastName: string, phone?: string | null, address?: string | null, department?: { __typename?: 'Department', id?: number | null, name: string } | null } | null> };
+export type GetEmployeesQuery = { __typename?: 'Query', getEmployees: Array<{ __typename?: 'Employee', id?: number | null, firstName: string, lastName: string, hireDate: string, department?: { __typename?: 'Department', name: string } | null } | null> };
+
+export type GetEmployeeQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type GetEmployeeQuery = { __typename?: 'Query', getEmployee?: { __typename?: 'Employee', id?: number | null, firstName: string, lastName: string, hireDate: string, address?: string | null, phone?: string | null, isActive?: boolean | null, department?: { __typename?: 'Department', id?: number | null, name: string } | null } | null };
 
 
 export const GetEmployeesDocument = gql`
@@ -130,8 +139,23 @@ export const GetEmployeesDocument = gql`
     id
     firstName
     lastName
-    phone
+    hireDate
+    department {
+      name
+    }
+  }
+}
+    `;
+export const GetEmployeeDocument = gql`
+    query GetEmployee($id: Int!) {
+  getEmployee(id: $id) {
+    id
+    firstName
+    lastName
+    hireDate
     address
+    phone
+    isActive
     department {
       id
       name
@@ -145,10 +169,14 @@ export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, str
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
 const GetEmployeesDocumentString = print(GetEmployeesDocument);
+const GetEmployeeDocumentString = print(GetEmployeeDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     GetEmployees(variables?: GetEmployeesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetEmployeesQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetEmployeesQuery>(GetEmployeesDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetEmployees', 'query', variables);
+    },
+    GetEmployee(variables: GetEmployeeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetEmployeeQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetEmployeeQuery>(GetEmployeeDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetEmployee', 'query', variables);
     }
   };
 }

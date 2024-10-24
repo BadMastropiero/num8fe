@@ -3,8 +3,22 @@ query GetEmployees {
         id
         firstName
         lastName
-        phone
+        hireDate
+        department {
+            name
+        }
+    }
+}
+
+query GetEmployee($id: Int!) {
+    getEmployee(id: $id) {
+        id
+        firstName
+        lastName
+        hireDate
         address
+        phone
+        isActive
         department {
             id
             name
