@@ -1,0 +1,27 @@
+.container {
+    padding: var(--spacing-s);
+    margin: auto;
+    width: 100%;
+    max-width: 1200px;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        text-align: start;
+    }
+
+    tr {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /*gap: var(--spacing-s);*/
+        padding: var(--spacing-s);
+        border: solid 1px #ccc;
+    }
+}
+
+.title {
+    margin-bottom: var(--spacing-m);
+}

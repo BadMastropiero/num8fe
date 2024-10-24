@@ -41,10 +41,21 @@ export type Department = {
   name: Scalars['String']['output'];
 };
 
+export type DepartmentHistory = {
+  __typename: 'DepartmentHistory';
+  department: Department;
+  departmentId: Scalars['Int']['output'];
+  employee: Employee;
+  employeeId: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  startDate: Scalars['String']['output'];
+};
+
 export type Employee = {
   __typename: 'Employee';
   address: Maybe<Scalars['String']['output']>;
   department: Maybe<Department>;
+  departmentHistory: Maybe<Array<Maybe<DepartmentHistory>>>;
   departmentId: Scalars['Int']['output'];
   firstName: Scalars['String']['output'];
   hireDate: Scalars['String']['output'];
@@ -164,7 +175,7 @@ export type GetEmployeeQueryVariables = Exact<{
 }>;
 
 
-export type GetEmployeeQuery = { __typename: 'Query', getEmployee: { __typename: 'Employee', id: number, firstName: string, lastName: string, hireDate: string, address: string | null, phone: string | null, isActive: boolean, department: { __typename: 'Department', id: number, name: string } | null } | null };
+export type GetEmployeeQuery = { __typename: 'Query', getEmployee: { __typename: 'Employee', id: number, firstName: string, lastName: string, hireDate: string, address: string | null, phone: string | null, isActive: boolean, department: { __typename: 'Department', id: number, name: string } | null, departmentHistory: Array<{ __typename: 'DepartmentHistory', startDate: string, department: { __typename: 'Department', name: string } } | null> | null } | null };
 
 
 export const ActivateEmployeeDocument = gql`
@@ -222,6 +233,12 @@ export const GetEmployeeDocument = gql`
     department {
       id
       name
+    }
+    departmentHistory {
+      startDate
+      department {
+        name
+      }
     }
   }
 }

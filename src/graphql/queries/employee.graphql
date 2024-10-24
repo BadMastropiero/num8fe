@@ -23,5 +23,11 @@ query GetEmployee($id: Int!) {
             id
             name
         }
+        departmentHistory {
+            startDate
+            department {
+                name
+            }
+        }
     }
 }

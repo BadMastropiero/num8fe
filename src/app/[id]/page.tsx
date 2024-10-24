@@ -4,6 +4,7 @@ import {notFound} from "next/navigation";
 import {EmployeeDetails} from "@/components";
 import {DepartmentSelect} from "@/components/DepartmentSelect/DepartmentSelect";
 import {DepartmentMinAggregate} from "@/types/department";
+import {DepartmentsHistory} from "@/components/DepartmentsHistory/DepartmentsHistory";
 
 const getEmployee = async (id: string) => {
     const data = await sdk.GetEmployee({id: +id});
@@ -61,6 +62,7 @@ export default async function EmployeeDetailsPage({params}: { params: Promise<Pa
             <main className={styles.main}>
                 <EmployeeDetails employee={data}/>
                 <DepartmentSelect selected={data.department?.id} userId={data.id} departments={departments}/>
+                <DepartmentsHistory departments={data.departmentHistory?.filter(h => !!h) || []} />
             </main>
         </>
     );

@@ -29,3 +29,4 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 - `EmployeeDetails` component can be subdivided into smaller components.
 - Improve error handling and use custom error boundaries.
 - Add responsive design for mobile devices.
+- 
