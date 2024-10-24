@@ -1,0 +1,58 @@
+.container {
+    display: flex;
+    min-height: calc(var(--spacing-l) * 2);
+    padding: var(--spacing-s);
+    flex-wrap: wrap;
+    gap: var(--spacing-m);
+    margin: auto;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.avatar {
+    width: calc(var(--spacing-l) * 10);
+    height: calc(var(--spacing-l) * 10);
+    border-radius: var(--spacing-s);
+    margin-right: var(--spacing-m);
+    background: var(--primary);
+    position: relative;
+}
+
+.name {
+    margin-bottom: var(--spacing-s);
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+}
+
+.hireData {
+    display: flex;
+    gap: var(--spacing-s);
+    flex-direction: column;
+}
+
+.hireControls {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+}
+
+.activeStatus {
+    position: absolute;
+    bottom: var(--spacing-s);
+    right: var(--spacing-s);
+    left: var(--spacing-s);
+    background: var(--success);
+    color: white;
+    text-align: center;
+    padding: var(--spacing-s);
+    border-radius: var(--spacing-s);
+}
+
+.danger {
+    background: var(--danger);
+}

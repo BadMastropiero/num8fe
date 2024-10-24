@@ -1,0 +1,20 @@
+.form {
+    display: grid;
+    gap: var(--spacing-s);
+    grid-template-columns: 1fr 100px;
+    margin: auto;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.label {
+    grid-column: span 2;
+}
+
+.select {
+    width: 100%;
+    padding: var(--spacing-s);
+    border: solid 1px #ccc;
+    border-radius: var(--spacing-s);
+    background: white;
+}

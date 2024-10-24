@@ -1,18 +1,11 @@
 import styles from "./EmployeeListItem.module.css";
+import componentStyles from "@/components/Components.module.css";
 import {EmployeeMinAggregate} from "@/types/employee";
 import Link from "next/link";
+import {getSince} from "@/utils/dates";
 
 interface EmployeeListItemProps {
     employee: EmployeeMinAggregate;
-}
-
-const getSince = (date: string) => {
-    const hireDate = new Date(+date);
-    const now = new Date();
-    const years = now.getFullYear() - hireDate.getFullYear();
-    const months = now.getMonth() - hireDate.getMonth();
-    const days = now.getDate() - hireDate.getDate();
-    return `${years} y - ${months} m - ${days} d`;
 }
 
 export function EmployeeListItem({employee}: EmployeeListItemProps) {
@@ -28,7 +21,7 @@ export function EmployeeListItem({employee}: EmployeeListItemProps) {
                 </div>
             </div>
             <div className={styles.linkContainer}>
-                <Link href={`/${employee.id}`} className={styles.link}>
+                <Link href={`/${employee.id}`} className={componentStyles.btn}>
                     View details
                 </Link>
             </div>

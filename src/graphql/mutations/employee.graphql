@@ -1,0 +1,17 @@
+mutation ActivateEmployee($id: Int!) {
+  updateEmployee(updateEmployeeInput: {id: $id, isActive: true}) {
+    id
+  }
+}
+
+mutation DeactivateEmployee($id: Int!) {
+  updateEmployee(updateEmployeeInput: {id: $id, isActive: false}) {
+    id
+  }
+}
+
+mutation UpdateEmployeeDepartment($id: Int!, $departmentId: Int!) {
+  updateEmployee(updateEmployeeInput: {id: $id, departmentId: $departmentId}) {
+    id
+  }
+}

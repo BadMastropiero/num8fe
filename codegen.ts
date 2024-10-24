@@ -16,6 +16,8 @@ const config: CodegenConfig = {
             ],
             config: {
                 rawRequest: true,
+                avoidOptionals: true,
+                nonOptionalTypename: true
             },
         },
     },

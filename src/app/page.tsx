@@ -9,7 +9,7 @@ const getEmployees = async () => {
     const nonNullList: EmployeeMinAggregate[] = [];
     data.data.getEmployees.forEach((employee) => {
         if (employee?.id) {
-            nonNullList.push({...employee, id: employee.id || -1});
+            nonNullList.push(employee);
         }
     });
     return nonNullList;

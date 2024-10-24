@@ -19,47 +19,47 @@ export type Scalars = {
 };
 
 export type CreateDepartmentInput = {
-  description?: InputMaybe<Scalars['String']['input']>;
+  description: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
 };
 
 export type CreateEmployeeInput = {
-  address?: InputMaybe<Scalars['String']['input']>;
-  departmentId?: InputMaybe<Scalars['Int']['input']>;
+  address: InputMaybe<Scalars['String']['input']>;
+  departmentId: Scalars['Int']['input'];
   firstName: Scalars['String']['input'];
   hireDate: Scalars['String']['input'];
-  isActive?: InputMaybe<Scalars['Boolean']['input']>;
+  isActive: Scalars['Boolean']['input'];
   lastName: Scalars['String']['input'];
-  phone?: InputMaybe<Scalars['String']['input']>;
+  phone: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Department = {
-  __typename?: 'Department';
-  description?: Maybe<Scalars['String']['output']>;
-  employees?: Maybe<Array<Maybe<Employee>>>;
-  id?: Maybe<Scalars['Int']['output']>;
+  __typename: 'Department';
+  description: Maybe<Scalars['String']['output']>;
+  employees: Maybe<Array<Maybe<Employee>>>;
+  id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
 };
 
 export type Employee = {
-  __typename?: 'Employee';
-  address?: Maybe<Scalars['String']['output']>;
-  department?: Maybe<Department>;
-  departmentId?: Maybe<Scalars['Int']['output']>;
+  __typename: 'Employee';
+  address: Maybe<Scalars['String']['output']>;
+  department: Maybe<Department>;
+  departmentId: Scalars['Int']['output'];
   firstName: Scalars['String']['output'];
   hireDate: Scalars['String']['output'];
-  id?: Maybe<Scalars['Int']['output']>;
-  isActive?: Maybe<Scalars['Boolean']['output']>;
+  id: Scalars['Int']['output'];
+  isActive: Scalars['Boolean']['output'];
   lastName: Scalars['String']['output'];
-  phone?: Maybe<Scalars['String']['output']>;
+  phone: Maybe<Scalars['String']['output']>;
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
+  __typename: 'Mutation';
   createDepartment: Department;
   createEmployee: Employee;
-  removeDepartment?: Maybe<Department>;
-  removeEmployee?: Maybe<Employee>;
+  removeDepartment: Maybe<Department>;
+  removeEmployee: Maybe<Employee>;
   updateDepartment: Department;
   updateEmployee: Employee;
 };
@@ -95,10 +95,10 @@ export type MutationUpdateEmployeeArgs = {
 };
 
 export type Query = {
-  __typename?: 'Query';
-  getDepartment?: Maybe<Department>;
+  __typename: 'Query';
+  getDepartment: Maybe<Department>;
   getDepartments: Array<Maybe<Department>>;
-  getEmployee?: Maybe<Employee>;
+  getEmployee: Maybe<Employee>;
   getEmployees: Array<Maybe<Employee>>;
 };
 
@@ -117,22 +117,85 @@ export type UpdateDepartmentInput = {
 };
 
 export type UpdateEmployeeInput = {
+  address: InputMaybe<Scalars['String']['input']>;
+  departmentId: InputMaybe<Scalars['Int']['input']>;
+  firstName: InputMaybe<Scalars['String']['input']>;
+  hireDate: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
+  isActive: InputMaybe<Scalars['Boolean']['input']>;
+  lastName: InputMaybe<Scalars['String']['input']>;
+  phone: InputMaybe<Scalars['String']['input']>;
 };
+
+export type ActivateEmployeeMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type ActivateEmployeeMutation = { __typename: 'Mutation', updateEmployee: { __typename: 'Employee', id: number } };
+
+export type DeactivateEmployeeMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeactivateEmployeeMutation = { __typename: 'Mutation', updateEmployee: { __typename: 'Employee', id: number } };
+
+export type UpdateEmployeeDepartmentMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  departmentId: Scalars['Int']['input'];
+}>;
+
+
+export type UpdateEmployeeDepartmentMutation = { __typename: 'Mutation', updateEmployee: { __typename: 'Employee', id: number } };
+
+export type GetDepartmentsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetDepartmentsQuery = { __typename: 'Query', getDepartments: Array<{ __typename: 'Department', id: number, name: string } | null> };
 
 export type GetEmployeesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetEmployeesQuery = { __typename?: 'Query', getEmployees: Array<{ __typename?: 'Employee', id?: number | null, firstName: string, lastName: string, hireDate: string, department?: { __typename?: 'Department', name: string } | null } | null> };
+export type GetEmployeesQuery = { __typename: 'Query', getEmployees: Array<{ __typename: 'Employee', id: number, firstName: string, lastName: string, hireDate: string, department: { __typename: 'Department', name: string } | null } | null> };
 
 export type GetEmployeeQueryVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
 
 
-export type GetEmployeeQuery = { __typename?: 'Query', getEmployee?: { __typename?: 'Employee', id?: number | null, firstName: string, lastName: string, hireDate: string, address?: string | null, phone?: string | null, isActive?: boolean | null, department?: { __typename?: 'Department', id?: number | null, name: string } | null } | null };
+export type GetEmployeeQuery = { __typename: 'Query', getEmployee: { __typename: 'Employee', id: number, firstName: string, lastName: string, hireDate: string, address: string | null, phone: string | null, isActive: boolean, department: { __typename: 'Department', id: number, name: string } | null } | null };
 
 
+export const ActivateEmployeeDocument = gql`
+    mutation ActivateEmployee($id: Int!) {
+  updateEmployee(updateEmployeeInput: {id: $id, isActive: true}) {
+    id
+  }
+}
+    `;
+export const DeactivateEmployeeDocument = gql`
+    mutation DeactivateEmployee($id: Int!) {
+  updateEmployee(updateEmployeeInput: {id: $id, isActive: false}) {
+    id
+  }
+}
+    `;
+export const UpdateEmployeeDepartmentDocument = gql`
+    mutation UpdateEmployeeDepartment($id: Int!, $departmentId: Int!) {
+  updateEmployee(updateEmployeeInput: {id: $id, departmentId: $departmentId}) {
+    id
+  }
+}
+    `;
+export const GetDepartmentsDocument = gql`
+    query GetDepartments {
+  getDepartments {
+    id
+    name
+  }
+}
+    `;
 export const GetEmployeesDocument = gql`
     query GetEmployees {
   getEmployees {
@@ -168,10 +231,26 @@ export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, str
 
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
+const ActivateEmployeeDocumentString = print(ActivateEmployeeDocument);
+const DeactivateEmployeeDocumentString = print(DeactivateEmployeeDocument);
+const UpdateEmployeeDepartmentDocumentString = print(UpdateEmployeeDepartmentDocument);
+const GetDepartmentsDocumentString = print(GetDepartmentsDocument);
 const GetEmployeesDocumentString = print(GetEmployeesDocument);
 const GetEmployeeDocumentString = print(GetEmployeeDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    ActivateEmployee(variables: ActivateEmployeeMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: ActivateEmployeeMutation; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<ActivateEmployeeMutation>(ActivateEmployeeDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ActivateEmployee', 'mutation', variables);
+    },
+    DeactivateEmployee(variables: DeactivateEmployeeMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: DeactivateEmployeeMutation; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<DeactivateEmployeeMutation>(DeactivateEmployeeDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeactivateEmployee', 'mutation', variables);
+    },
+    UpdateEmployeeDepartment(variables: UpdateEmployeeDepartmentMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: UpdateEmployeeDepartmentMutation; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<UpdateEmployeeDepartmentMutation>(UpdateEmployeeDepartmentDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateEmployeeDepartment', 'mutation', variables);
+    },
+    GetDepartments(variables?: GetDepartmentsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetDepartmentsQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetDepartmentsQuery>(GetDepartmentsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetDepartments', 'query', variables);
+    },
     GetEmployees(variables?: GetEmployeesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetEmployeesQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetEmployeesQuery>(GetEmployeesDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetEmployees', 'query', variables);
     },

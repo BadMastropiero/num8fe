@@ -1,0 +1,18 @@
+.btn {
+    background: var(--success);
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-s);
+    border-radius: var(--spacing-s);
+    transition: 0.1s ease all;
+    text-align: center;
+    border: none;
+}
+
+.btn:hover:not(:disabled) {
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+}

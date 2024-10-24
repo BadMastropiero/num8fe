@@ -10,6 +10,7 @@ body {
 
 :root {
     --primary: bisque;
+    --danger: #dc3545;
     --success: #28a745;
     --spacing-s: 10px;
     --spacing-m: 20px;
