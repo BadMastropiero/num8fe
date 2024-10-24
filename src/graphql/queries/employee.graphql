@@ -1,0 +1,13 @@
+query GetEmployees {
+    getEmployees {
+        id
+        firstName
+        lastName
+        phone
+        address
+        department {
+            id
+            name
+        }
+    }
+}
